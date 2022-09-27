@@ -142,14 +142,27 @@ public class Main {
     }
 
     private static Donto sorbolDonto(String sor) {
-        // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
+        // CSV sorból dolgozó konstruktor használata.
+        Donto donto = new Donto(sor);
+
+        // Minden értéket beállító konstruktor használata.
+        /* // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
         // különálló értékekre.
         String[] ertekek = sor.split(";");
 
         // Új (üres, mivel nincs konstruktor) Donto példány létrehozása.
-        Donto donto = new Donto();
+        Donto donto = new Donto(
+                ertekek[0], ertekek[1],
+                ertekek[2], ertekek[3], ertekek[4],
+                ertekek[5], ertekek[6],
+                Integer.parseInt(ertekek[7])
+        ); */
 
-        // Döntő értékeinek a beállítása.
+        // Default konstruktor használata.
+        /* // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
+        // különálló értékekre.
+        String[] ertekek = sor.split(";");
+        Donto donto = new Donto();
         donto.sorszam = ertekek[0];
         donto.datum = ertekek[1];
         donto.gyoztes = ertekek[2];
@@ -157,7 +170,7 @@ public class Main {
         donto.vesztes = ertekek[4];
         donto.helyszin = ertekek[5];
         donto.varosAllam = ertekek[6];
-        donto.nezoszam = Integer.parseInt(ertekek[7]);
+        donto.nezoszam = Integer.parseInt(ertekek[7]); */
 
         // Kész döntő visszaadása a hívónak (main metódus)
         return donto;
