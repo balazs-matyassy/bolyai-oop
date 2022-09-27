@@ -9,28 +9,8 @@ import java.util.List;
 
 public class Main {
 
-    // PIPELINE (csővezeték)
-    // 1. adatok beolvasása -> 2. adatok feldolgozása -> 3. adatok kiírása
     public static void main(String[] args) {
-        // Ha bárhol történik hiba, akkor megszakad a try blokk,
-        // és a catch blokkban folytatódik a program végrehajtása.
-        // 1. - adatok beolvasása
-        // 2. - adatok feldolgozása
-        // 3. - adatok kiírása
-        // Ha bárhol hiba van, akkor a többi lépést NEM kell folytatni.
         try {
-            // List<T>: Dinamikusan bővülő tömb.
-            // T: típusparaméter (milyen típusú értékeket tárolunk a listában)
-            // <>: diamond ("gyémánt") operátor:
-            //      new ArrayList<>() típusa a bal oldalon megadott típus lesz,
-            //      new ArrayList<Donto>()
-            // List<T>: az interfész
-            // ArrayList<T>: konkrét implementáció (gyorsan lehet benne az adott helyen megnézni)
-            //      olvasásra optimalizálva
-            // LinkedList<T>: konkrét implementáció (gyorsan lehet a végére új beszúrni)
-            //      írásra optimalizálva
-            // Ezen a szinten bármelyik haszálható, nem jelent nagy különbséget.
-            // Ha nincs jobb ötletünk, akkor használjuk az ArrayList<T>-t.
             List<Donto> dontok = new ArrayList<>();
 
             /*
@@ -57,44 +37,6 @@ public class Main {
                     // döntő hozzáfűzése a lista végére
                     dontok.add(donto);
                 }
-            }
-
-            /*
-                2. Adatok feldolgozása
-             */
-            // System.out.print: NEM formázott, NINCS sortörés
-            // System.out.println: NEM formázott, VAN sortörés
-            // System.out.printf: formázott, NINCS sortörés
-            System.out.printf("4. feladat: Döntők száma: %d\n", dontok.size());
-
-            /*
-                3. Adatok kiírása
-             */
-            // Írásra nyitunk meg egy fájlt.
-            // Itt sincs hibakezelés (ebben az esetben a külső catch kezeli az esetleges hibákat).
-            try (PrintWriter writer = new PrintWriter("SuperBowlNew.txt")) {
-                // Ha szeretnénk fejlécet:
-                writer.println("Ssz;Dátum;Győztes;Eredmény;Vesztes;Helyszín;VárosÁllam;Nézőszám");
-
-                // for-each szerkezet
-                // Egy gyűjtemény (List<T>, Set<T> vagy T[] (tömb)) minden elemét értékenként bejárunk.
-                // A feldolgozáshoz nincs szükség az indexre.
-                for (Donto donto : dontok) {
-                    // Döntő visszaalakítása sorrá a segédmetódus segítségével.
-                    // Ebben az esetben változatlan formában írjuk ki az értékeket,
-                    // de amúgy lehtőség lenne a dontobolSor metódusban egyéb formátumra is konvertálni.
-                    String sor = dontobolSor(donto);
-                    // Konvertált sor kiírása a megnyitott fájlba.
-                    // lsd. System.out.println: NINCS formázás, VAN sortörés.
-                    writer.println(sor);
-                }
-
-                // Alternatív megoldás:
-                /* for (int i = 0; i < dontok.size(); i++) {
-                    Donto donto = dontok.get(i);
-                    String sor = dontobolSor(donto);
-                    writer.println(sor);
-                } */
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,20 +66,6 @@ public class Main {
 
         // Kész döntő visszaadása a hívónak (main metódus)
         return donto;
-    }
-
-    /*
-        3. Adatok kiírása
-    */
-    private static String dontobolSor(Donto donto) {
-        return donto.sorszam
-                + ";" + donto.datum
-                + ";" + donto.gyoztes
-                + ";" + donto.eredmeny
-                + ";" + donto.vesztes
-                + ";" + donto.helyszin
-                + ";" + donto.varosAllam
-                + ";" + donto.nezoszam; // számból automatikus a szöveggé konvertálás
     }
 
 }

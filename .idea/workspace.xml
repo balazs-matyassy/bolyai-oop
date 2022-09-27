@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SuperBowl.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bolyai/Donto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/bolyai/Main.java" afterDir="false" />
+    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: skeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bolyai/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bolyai/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +13,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="01_skeleton" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -74,8 +72,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1664264440900</updated>
-      <workItem from="1664264443980" duration="2301000" />
+      <workItem from="1664264443980" duration="3144000" />
     </task>
+    <task id="LOCAL-00001" summary="balazs.matyassy: skeleton">
+      <created>1664270548350</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664270548353</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,5 +100,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="balazs.matyassy: skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="balazs.matyassy: skeleton" />
   </component>
 </project>
