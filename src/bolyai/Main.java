@@ -36,6 +36,19 @@ public class Main {
             elsoDonto.varosAllam = "Los Angeles, Kalifornia";
             elsoDonto.nezoszam = 61946;
 
+            // NEM jön létre új példány (new operátor NEM kerül meghívásra).
+            // Új referenciát hozunk létre a létező objektumhoz.
+            Donto masolat = elsoDonto;
+            // masolat.nezoszam = 0; // elsoDonto.nezoszam is 0 lesz.
+            // STACK: primitív típusok (int, long, byte, float, double, char, boolean...)
+            //      + referenciák (pl. @501)
+            // HEAP: Objektumok.
+            // Több referencia mutathat ugyanarra az objektumra (2 póráz 1 kutyán).
+
+            // Ezért nem szabad szövegeket == -vel összehasonlítani.
+            System.out.println("Hello World" == "Hello " + "World"); // false
+            System.out.println("Hello World".equals("Hello World")); // true
+
             // false: 2 azonos tartalmú másolat,
             // de másik példányok
             System.out.println(elsoDonto == dontok.get(0));

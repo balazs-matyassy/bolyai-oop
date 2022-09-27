@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: metódusok">
+    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: konstruktorok">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bolyai/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bolyai/Main.java" afterDir="false" />
     </list>
