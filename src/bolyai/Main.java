@@ -44,6 +44,7 @@ public class Main {
             // toString kerül meghívásra
             System.out.println(elsoDonto);
 
+            // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html
             // List<T>: dinamikusan bővülő tömb
             // Implementációk:
             // - ArrayList<T>: Index alapján gyorsabb elérés.
@@ -70,12 +71,14 @@ public class Main {
                 // Csináljunk valamit.
             }
 
+            // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Set.html
             // Set<T>: Egyedi elemeket tartalmazó kollekció (equals és hashCode alapján).
             // "Halmaz" megvalósítása.
             // Implementációk:
             // - HashSet<T>: Gyorsabb elérés, nem rendezett elemekkel is kompatibilis.
             //      Elemek véletlenszerű sorrendben kerülnek tárolásra.
             // - TreeSet<T>: Elemek rendezett sorrendben kerülnek tárolásra.
+            //      Elemeknek implementálniuk kell a Comparable<T>-t.
             // Pl. Set<Donto> dontok = new HashSet<>();
             // Fontosabb metódusok:
             // - dontok.size(): Listában tárolt elemek számát visszaadó metódus.
@@ -87,6 +90,7 @@ public class Main {
             // - dontok.clear(): Minden döntő törlése.
             // Bejárás: for-each segítségével
 
+            // https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Map.html
             // Map<K, V>: Kulcs-érték párokat tartalmazó adatstruktúra (függvényszerű kapcsolat)
             // Implementációk:
             // - HashMap<K, V>: Kulcsok alapján rendezetlen, kicsit gyorsabb.
@@ -112,7 +116,7 @@ public class Main {
                 System.out.println(orszag + ": " + lakossagOrszagonkent.get(orszag));
             }
 
-            // Map bejárása értékek szerint:
+            // Map bejárása értékek szerint (kulcsot (országot) ebben az esetben nehéz lekérdezni):
             for (int lakossag : lakossagOrszagonkent.values()) {
                 System.out.println(lakossag);
             }
