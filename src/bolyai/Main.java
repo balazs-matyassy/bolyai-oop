@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 public class Main {
 
@@ -22,6 +25,102 @@ public class Main {
                 1. Adatok beolvasása
              */
             List<Donto> dontok = dontokBeolvasasa("SuperBowl.txt");
+
+            Donto elsoDonto = new Donto();
+            elsoDonto.sorszam = "I.";
+            elsoDonto.datum = "1967.01.15.";
+            elsoDonto.gyoztes = "Green Bay Packers";
+            elsoDonto.eredmeny = "35-10";
+            elsoDonto.vesztes = "Kansas City Chiefs";
+            elsoDonto.helyszin = "Los Angeles Memorial Coliseum";
+            elsoDonto.varosAllam = "Los Angeles, Kalifornia";
+            elsoDonto.nezoszam = 61946;
+
+            // false: 2 azonos tartalmú másolat,
+            // de másik példányok
+            System.out.println(elsoDonto == dontok.get(0));
+            // true: 2 azonos tartalmú másolat
+            System.out.println(elsoDonto.equals(dontok.get(0)));
+            // toString kerül meghívásra
+            System.out.println(elsoDonto);
+
+            // List<T>: dinamikusan bővülő tömb
+            // Implementációk:
+            // - ArrayList<T>: Index alapján gyorsabb elérés.
+            // - LinkedList<T>: Gyorsabb hozzáfűzés a lista végére (elejére).
+            // Pl. List<Donto> dontok = new ArrayList<>();
+            //      <>: diamond operátor (jobb oldalon NEM kell megint megadni a típust)
+            // Fontosabb metódusok:
+            // - dontok.size(): Listában tárolt elemek számát visszaadó metódus.
+            // - dontok.isEmpty(): Üres-e a lista (elemszám == 0)?
+            // - dontok.add(donto): Új döntő hozzáfűzése a lista végére.
+            // - dontok.add(0, donto): Új döntő beszúrása az adott indexre.
+            // - dontok.get(0): Adott indexen található elem visszaadása.
+            //      Első elem indexe: 0, utolsó elem indexe: size - 1.
+            // - dontok.remove(donto): Annak a döntőnek a törlése, ahol donto.equals(listaEleme).
+            // - dontok.remove(0): Döntő törlése az adott indexről.
+            // - dontok.contains(donto): Tartalmazza-e a lista a paraméterül adott döntőt?
+            //      (Van-e olyan döntő a listában, ahol donto.equals(listaEleme)?)
+            // - dontok.indexOf(donto): Melyik indexen van az adott döntő a listában
+            //      (melyik indexű elemre igaz a donto.equals(listaEleme)?)
+            // - dontok.clear(): Minden döntő törlése.
+
+            // Lista bejárása:
+            for (Donto donto : dontok) {
+                // Csináljunk valamit.
+            }
+
+            // Set<T>: Egyedi elemeket tartalmazó kollekció (equals és hashCode alapján).
+            // "Halmaz" megvalósítása.
+            // Implementációk:
+            // - HashSet<T>: Gyorsabb elérés, nem rendezett elemekkel is kompatibilis.
+            //      Elemek véletlenszerű sorrendben kerülnek tárolásra.
+            // - TreeSet<T>: Elemek rendezett sorrendben kerülnek tárolásra.
+            // Pl. Set<Donto> dontok = new HashSet<>();
+            // Fontosabb metódusok:
+            // - dontok.size(): Listában tárolt elemek számát visszaadó metódus.
+            // - dontok.isEmpty(): Üres-e a lista (elemszám == 0)?
+            // - dontok.add(donto): Új döntő hozzáfűzése a lista végére.
+            // - dontok.remove(donto): Annak a döntőnek a törlése, ahol donto.equals(listaEleme).
+            // - dontok.contains(donto): Tartalmazza-e a lista a paraméterül adott döntőt?
+            //      (Van-e olyan döntő a listában, ahol donto.equals(listaEleme)?)
+            // - dontok.clear(): Minden döntő törlése.
+            // Bejárás: for-each segítségével
+
+            // Map<K, V>: Kulcs-érték párokat tartalmazó adatstruktúra (függvényszerű kapcsolat)
+            // Implementációk:
+            // - HashMap<K, V>: Kulcsok alapján rendezetlen, kicsit gyorsabb.
+            // - TreeMap<K, V>: Kulcsok alapján rendezett.
+            // Pl. Map<String, Integer> lakossagOrszagonkent = new TreeMap<>();
+            // Fontosabb metódusok:
+            // lakossagOrszagonkent.get("Magyarország"): Adott ország lakosságát visszaadó metódus.
+            //      Ha nincs bejegyzés, akkor null (érvénytelen, ismeretlen) értéket ad vissza.
+            // lakossagOrszagonkent.getOrDefault("Bergengócia", 0): Adott ország lakosságát visszaadó metódus.
+            //      Ha nincs bejegyzés, akkor 0 (default) értéket ad vissza.
+            // lakossagOrszagonkent.put("Magyarország", 10_000_000): Új érték hozzáadása a gyűjteményhez.
+            //      (Vagy régi felülírása).
+            // lakossagOrszagonkent.containsKey("Magyarorszag"): Van-e bejegyzés az adott kulcshoz?
+            // lakossagOrszagonkent.size(): Bejegyzések számát visszaadó metódus.
+            // lakossagOrszagonkent.clear(): Bejegyzéseket törlő metódus.
+
+            Map<String, Integer> lakossagOrszagonkent = new TreeMap<>();
+            lakossagOrszagonkent.put("Magyarország", 10_000_000);
+            lakossagOrszagonkent.put("Németország", 80_000_000);
+
+            // Map bejárása kulcsok szerint:
+            for (String orszag : lakossagOrszagonkent.keySet()) {
+                System.out.println(orszag + ": " + lakossagOrszagonkent.get(orszag));
+            }
+
+            // Map bejárása értékek szerint:
+            for (int lakossag : lakossagOrszagonkent.values()) {
+                System.out.println(lakossag);
+            }
+
+            // Map bejárása kulcs-érték párok szerint:
+            for (Entry<String, Integer> bejegyzes : lakossagOrszagonkent.entrySet()) {
+                System.out.println(bejegyzes.getKey() + ": " + bejegyzes.getValue());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

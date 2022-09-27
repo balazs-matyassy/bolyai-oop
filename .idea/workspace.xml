@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: metódusok">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bolyai/Donto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bolyai/Donto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bolyai/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bolyai/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +103,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="03_tetelek_adatszerkezetek" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
