@@ -19,45 +19,10 @@ public class Main {
         // 3. - adatok kiírása
         // Ha bárhol hiba van, akkor a többi lépést NEM kell folytatni.
         try {
-            // List<T>: Dinamikusan bővülő tömb.
-            // T: típusparaméter (milyen típusú értékeket tárolunk a listában)
-            // <>: diamond ("gyémánt") operátor:
-            //      new ArrayList<>() típusa a bal oldalon megadott típus lesz,
-            //      new ArrayList<Donto>()
-            // List<T>: az interfész
-            // ArrayList<T>: konkrét implementáció (gyorsan lehet benne az adott helyen megnézni)
-            //      olvasásra optimalizálva
-            // LinkedList<T>: konkrét implementáció (gyorsan lehet a végére új beszúrni)
-            //      írásra optimalizálva
-            // Ezen a szinten bármelyik haszálható, nem jelent nagy különbséget.
-            // Ha nincs jobb ötletünk, akkor használjuk az ArrayList<T>-t.
-            List<Donto> dontok = new ArrayList<>();
-
             /*
                 1. Adatok beolvasása
              */
-
-            // try-with resources
-            // Hibától függetlenül lezárjuk a megnyitott fájlt a blokk végén.
-            // Nincs catch blokk, emiatt nem kezeli a hibákat,
-            // de nem tartjuk feleslegesen nyitva a fájlt.
-            // Ebben az esetben olvasásra nyitunk meg egy fájlt.
-            try (BufferedReader reader = new BufferedReader(new FileReader("SuperBowl.txt"))) {
-                reader.readLine(); // fejléc "eldobása", nem mentjük semmilyen változóba
-
-                String sor; // következő beolvasott sor
-
-                // Ha vége van a fájlnak, akkor a reader.readLine() null-t ad vissza.
-                // Összetett kifejezés:
-                // 1. line változóban elmenti a beolvasott értéket
-                // 2. ellenőrizzük, hogy végére értünk-e a fájlnak
-                while ((sor = reader.readLine()) != null) {
-                    // sor konvertálása döntővé a segédmetódus segítségével
-                    Donto donto = sorbolDonto(sor);
-                    // döntő hozzáfűzése a lista végére
-                    dontok.add(donto);
-                }
-            }
+            List<Donto> dontok = dontokBeolvasasa("SuperBowl.txt");
 
             /*
                 2. Adatok feldolgozása
@@ -70,32 +35,7 @@ public class Main {
             /*
                 3. Adatok kiírása
              */
-            // Írásra nyitunk meg egy fájlt.
-            // Itt sincs hibakezelés (ebben az esetben a külső catch kezeli az esetleges hibákat).
-            try (PrintWriter writer = new PrintWriter("SuperBowlNew.txt")) {
-                // Ha szeretnénk fejlécet:
-                writer.println("Ssz;Dátum;Győztes;Eredmény;Vesztes;Helyszín;VárosÁllam;Nézőszám");
-
-                // for-each szerkezet
-                // Egy gyűjtemény (List<T>, Set<T> vagy T[] (tömb)) minden elemét értékenként bejárunk.
-                // A feldolgozáshoz nincs szükség az indexre.
-                for (Donto donto : dontok) {
-                    // Döntő visszaalakítása sorrá a segédmetódus segítségével.
-                    // Ebben az esetben változatlan formában írjuk ki az értékeket,
-                    // de amúgy lehtőség lenne a dontobolSor metódusban egyéb formátumra is konvertálni.
-                    String sor = dontobolSor(donto);
-                    // Konvertált sor kiírása a megnyitott fájlba.
-                    // lsd. System.out.println: NINCS formázás, VAN sortörés.
-                    writer.println(sor);
-                }
-
-                // Alternatív megoldás:
-                /* for (int i = 0; i < dontok.size(); i++) {
-                    Donto donto = dontok.get(i);
-                    String sor = dontobolSor(donto);
-                    writer.println(sor);
-                } */
-            }
+            dontokKiirasa("SuperBowlNew.txt", dontok);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,6 +44,39 @@ public class Main {
     /*
         1. Adatok beolvasása
     */
+
+    // A metóduson belül nincs hibakezelés (catch blokk).
+    // Mivel a metódusban szerepelnek "kockázatos" utasítások (fájlból olvasás),
+    // de nincs hibakezelésre vonatkozó rész,
+    // emiatt az "adatokBeolvasasa" metódus is "kockázatos" lesz.
+    // A hibakezlés hiányát a "throws IOException"-el kell jelölni (hiba "továbbdobása").
+    // Javaban kötelező a hibakezelés.
+    // A hibákat
+    // - vagy el kell "kapni" (catch blokk),
+    // - vagy "tovább kell dobni" a hívó felé (throws).
+    private static List<Donto> dontokBeolvasasa(String utvonal) throws IOException {
+        try (BufferedReader reader = new BufferedReader(new FileReader(utvonal))) {
+            List<Donto> dontok = new ArrayList<>();
+
+            reader.readLine(); // fejléc "eldobása", nem mentjük semmilyen változóba
+
+            String sor; // következő beolvasott sor
+
+            // Ha vége van a fájlnak, akkor a reader.readLine() null-t ad vissza.
+            // Összetett kifejezés:
+            // 1. line változóban elmenti a beolvasott értéket
+            // 2. ellenőrizzük, hogy végére értünk-e a fájlnak
+            while ((sor = reader.readLine()) != null) {
+                // sor konvertálása döntővé a segédmetódus segítségével
+                Donto donto = sorbolDonto(sor);
+                // döntő hozzáfűzése a lista végére
+                dontok.add(donto);
+            }
+
+            return dontok;
+        }
+    }
+
     private static Donto sorbolDonto(String sor) {
         // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
         // különálló értékekre.
@@ -129,6 +102,28 @@ public class Main {
     /*
         3. Adatok kiírása
     */
+    private static void dontokKiirasa(String utvonal, List<Donto> dontok) throws IOException {
+        // Írásra nyitunk meg egy fájlt.
+        // Itt sincs hibakezelés (ebben az esetben a külső catch kezeli az esetleges hibákat).
+        try (PrintWriter writer = new PrintWriter(utvonal)) {
+            // Ha szeretnénk fejlécet:
+            writer.println("Ssz;Dátum;Győztes;Eredmény;Vesztes;Helyszín;VárosÁllam;Nézőszám");
+
+            // for-each szerkezet
+            // Egy gyűjtemény (List<T>, Set<T> vagy T[] (tömb)) minden elemét értékenként bejárunk.
+            // A feldolgozáshoz nincs szükség az indexre.
+            for (Donto donto : dontok) {
+                // Döntő visszaalakítása sorrá a segédmetódus segítségével.
+                // Ebben az esetben változatlan formában írjuk ki az értékeket,
+                // de amúgy lehtőség lenne a dontobolSor metódusban egyéb formátumra is konvertálni.
+                String sor = dontobolSor(donto);
+                // Konvertált sor kiírása a megnyitott fájlba.
+                // lsd. System.out.println: NINCS formázás, VAN sortörés.
+                writer.println(sor);
+            }
+        }
+    }
+
     private static String dontobolSor(Donto donto) {
         return donto.sorszam
                 + ";" + donto.datum
