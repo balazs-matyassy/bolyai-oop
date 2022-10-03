@@ -11,6 +11,16 @@ import java.util.Objects;
 //
 // Szabadstrand: Érdemes azonnal falat építeni, mivel egyébként át kell szoktatni az embereket,
 // vagy pedig nem lehet belépődíjat szedni, ha csak egy fal nélkül építünk kaput.
+//
+// Enkapszuláció / egységbe zárás:
+// Logikailag a döntőhöz tartozó kódot bemozgatjuk (általában statikus segédmetódusokból) a Donto osztályba:
+// - konstruktor (inicializáció)
+// - számított getterek (külső számítások)
+// - logikát tartozó setterek (pl. külső ellenőrzések)
+// - egyéb számítások (pl. adatok exportálása)
+// Néha nehéz eldönteni, hogy logikailag hova tartozik (pl. életkor egyértelműen az emberhez tartozik,
+// gyerekek alapján járó adókedvezmény logikailag az
+// emberhezhez vagy a bérszámfejtő modulhoz tartozik (statikus segédmetódus)).
 public class Donto {
     private String sorszam;
 
@@ -78,6 +88,16 @@ public class Donto {
         this.nezoszam = Integer.parseInt(ertekek[7]);
     }
 
+    // Ebben az esetben kb. ugyanannyira szép és védhető lehetne a külső segédmetódus (dontobolSor) is.
+    public String toCSV(int gyoztesSzereplesek, int vesztesSzereplesek) {
+        return getArabSorszam()
+                + ";" + getDatum()
+                + ";" + getGyoztes() + " (" + gyoztesSzereplesek + ")"
+                + ";" + getEredmeny()
+                + ";" + getVesztes() + " (" + vesztesSzereplesek + ")"
+                + ";" + getNezoszam(); // számból automatikus a szöveggé konvertálás
+    }
+
     // Az @Override annotáció azt jelzi,
     // hogy a metódus az ősosztályból (ebben az esetben Object) származik.
     // Minden objektum (Object minden leszármazottja) rendelkezik a következő 3 metódussal:
@@ -134,6 +154,12 @@ public class Donto {
         this.sorszam = sorszam;
     }
 
+    // számított értéket visszaadó getter
+    public String getArabSorszam() {
+        RomaiSorszam romaiSorszam = new RomaiSorszam(sorszam);
+        return romaiSorszam.getArabSsz();
+    }
+
     public String getDatum() {
         return datum;
     }
@@ -156,6 +182,24 @@ public class Donto {
 
     public void setEredmeny(String eredmeny) {
         this.eredmeny = eredmeny;
+    }
+
+    // számított értéket visszaadó getter
+    public int getGyoztesEredmeny() {
+        String[] eredmenyek = eredmeny.split("-");
+        return Integer.parseInt(eredmenyek[0]);
+    }
+
+    // számított értéket visszaadó getter
+    public int getVesztesEredmeny() {
+        String[] eredmenyek = eredmeny.split("-");
+        return Integer.parseInt(eredmenyek[1]);
+    }
+
+    // számított értéket visszaadó getter
+    public int getKulonbseg() {
+        // Math.abs nem feltétlenül szükséges, mivel gyoztesEredmeny >= vesztesEredmeny
+        return Math.abs(getGyoztesEredmeny() - getVesztesEredmeny());
     }
 
     public String getVesztes() {

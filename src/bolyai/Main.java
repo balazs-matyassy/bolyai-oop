@@ -40,14 +40,7 @@ public class Main {
 
             // for-each (összegzés)
             for (Donto donto : dontok) {
-                // adott meccshez tartozó különbség kiszámítása
-                String[] eredmenyek = donto.getEredmeny().split("-");
-                int gyoztesEredmeny = Integer.parseInt(eredmenyek[0]);
-                int vesztesEredmeny = Integer.parseInt(eredmenyek[1]);
-                // Math.abs nem feltétlenül szükséges, mivel gyoztesEredmeny >= vesztesEredmeny
-                int kulonbseg = Math.abs(gyoztesEredmeny - vesztesEredmeny);
-
-                ossz_kulonbseg += kulonbseg;
+                ossz_kulonbseg += donto.getKulonbseg();
             }
 
             // double: tört szám
@@ -72,16 +65,17 @@ public class Main {
                 }
             }
 
-            RomaiSorszam romaiSorszam = new RomaiSorszam(maxNezoszam.getSorszam());
-            String arabSorszam = romaiSorszam.getArabSsz();
-
             // redundáns, korábban már elvégeztük
             String[] eredmenyek = maxNezoszam.getEredmeny().split("-");
             int gyoztesEredmeny = Integer.parseInt(eredmenyek[0]);
             int vesztesEredmeny = Integer.parseInt(eredmenyek[1]);
 
             System.out.println("6. feladat: Legmagasabb nézőszám a döntők során:");
-            System.out.printf("\tSorszám (dátum): %s (%s)\n", arabSorszam, maxNezoszam.getDatum());
+            System.out.printf(
+                    "\tSorszám (dátum): %s (%s)\n",
+                    maxNezoszam.getArabSorszam(),
+                    maxNezoszam.getDatum()
+            );
             System.out.printf(
                     "\tGyőztes csapat: %s, szerzett pontok: %d\n",
                     maxNezoszam.getGyoztes(),
@@ -173,28 +167,12 @@ public class Main {
                 // Döntő visszaalakítása sorrá a segédmetódus segítségével.
                 // Ebben az esetben változatlan formában írjuk ki az értékeket,
                 // de amúgy lehtőség lenne a dontobolSor metódusban egyéb formátumra is konvertálni.
-                String sor = dontobolSor(donto, gyoztesSzereplesek, vesztesSzereplesek);
+                String sor = donto.toCSV(gyoztesSzereplesek, vesztesSzereplesek);
                 // Konvertált sor kiírása a megnyitott fájlba.
                 // lsd. System.out.println: NINCS formázás, VAN sortörés.
                 writer.println(sor);
             }
         }
-    }
-
-    private static String dontobolSor(
-            Donto donto,
-            int gyoztesSzereplesek,
-            int vesztesSzereplesek
-    ) {
-        RomaiSorszam romaiSorszam = new RomaiSorszam(donto.getSorszam());
-        String arabSorszam = romaiSorszam.getArabSsz();
-
-        return arabSorszam
-                + ";" + donto.getDatum()
-                + ";" + donto.getGyoztes() + " (" + gyoztesSzereplesek + ")"
-                + ";" + donto.getEredmeny()
-                + ";" + donto.getVesztes() + " (" + vesztesSzereplesek + ")"
-                + ";" + donto.getNezoszam(); // számból automatikus a szöveggé konvertálás
     }
 
 }
