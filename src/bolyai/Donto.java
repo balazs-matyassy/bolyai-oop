@@ -62,7 +62,7 @@ public class Donto {
         this.sorszam = sorszam;
         this.datum = datum;
         this.gyoztes = gyoztes;
-        this.eredmeny = eredmeny;
+        setEredmeny(eredmeny);
         this.vesztes = vesztes;
         this.helyszin = helyszin;
         this.varosAllam = varosAllam;
@@ -81,7 +81,7 @@ public class Donto {
         this.sorszam = ertekek[0];
         this.datum = ertekek[1];
         this.gyoztes = ertekek[2];
-        this.eredmeny = ertekek[3];
+        setEredmeny(ertekek[3]);
         this.vesztes = ertekek[4];
         this.helyszin = ertekek[5];
         this.varosAllam = ertekek[6];
@@ -180,7 +180,27 @@ public class Donto {
         return eredmeny;
     }
 
+    // setterben lehet logika a mező közvetlen írásával szempben
+    // (pl. ellenőrzés)
+    // Elvárt formátum pl. 32-10
     public void setEredmeny(String eredmeny) {
+        // reguláris kifejezések validációra (pl. érvényes-e egy email-cím)
+        // használhatók nagyon jól
+        // ^, $ (anchor / horgony): előtte és utána nem lehet semmi
+        // String.matches-nél NEM kellenek horgonyok (default)
+        // Matcher.matches-nél kellenek (egyébként a közepét vizsgálja)
+        if (!eredmeny.matches("\\d{1,3}-\\d{1,3}")) {
+            // Javaban 2 hibaosztály van:
+            // - Exception: kötelező kezelni (pl. fájl megnyitása -> IOException)
+            // - RuntimeException: nem kötelező kezelni, mert ellenőrzéssel elkerülhető a hiba.
+            // Pl. nem jó paraméter (IllegalArgumentException)
+            throw new IllegalArgumentException(
+                    "Érvénytelen eredmény: "
+                            + eredmeny
+                            + " (" + this + ")"
+            );
+        }
+
         this.eredmeny = eredmeny;
     }
 
