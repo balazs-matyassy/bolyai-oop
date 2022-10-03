@@ -3,22 +3,30 @@ package bolyai;
 import java.util.Objects;
 
 // 1. Adatstruktúra létrehozása (fejléc alapján)
+// Getterek-setterek segítségével el tudjuk rejteni az objektum belső állapotát.
+// "A városfalon belülre kerülnek az értékek".
+// Innentől fogva csak kérni lehet az objektumot, hogy visszaadja az adott értéket.
+// Pl. Excel számított cella.
+// Pl. Más pénztárcájába sem lehet belenézni, de meg lehet kérdezni, hogy mennyi pénze van.
+//
+// Szabadstrand: Érdemes azonnal falat építeni, mivel egyébként át kell szoktatni az embereket,
+// vagy pedig nem lehet belépődíjat szedni, ha csak egy fal nélkül építünk kaput.
 public class Donto {
-    public String sorszam;
+    private String sorszam;
 
-    public String datum;
+    private String datum;
 
-    public String gyoztes;
+    private String gyoztes;
 
-    public String eredmeny;
+    private String eredmeny;
 
-    public String vesztes;
+    private String vesztes;
 
-    public String helyszin;
+    private String helyszin;
 
-    public String varosAllam;
+    private String varosAllam;
 
-    public int nezoszam;
+    private int nezoszam;
 
     // Default konstruktor: Nem csinál semmit.
     // Ha létrehozunk legalább 1 konstruktort, akkor a default konstruktor letiltásra kerül.
@@ -116,5 +124,69 @@ public class Donto {
                 ", varosAllam='" + varosAllam + '\'' +
                 ", nezoszam=" + nezoszam +
                 '}';
+    }
+
+    public String getSorszam() {
+        return sorszam;
+    }
+
+    public void setSorszam(String sorszam) {
+        this.sorszam = sorszam;
+    }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public String getGyoztes() {
+        return gyoztes;
+    }
+
+    public void setGyoztes(String gyoztes) {
+        this.gyoztes = gyoztes;
+    }
+
+    public String getEredmeny() {
+        return eredmeny;
+    }
+
+    public void setEredmeny(String eredmeny) {
+        this.eredmeny = eredmeny;
+    }
+
+    public String getVesztes() {
+        return vesztes;
+    }
+
+    public void setVesztes(String vesztes) {
+        this.vesztes = vesztes;
+    }
+
+    public String getHelyszin() {
+        return helyszin;
+    }
+
+    public void setHelyszin(String helyszin) {
+        this.helyszin = helyszin;
+    }
+
+    public String getVarosAllam() {
+        return varosAllam;
+    }
+
+    public void setVarosAllam(String varosAllam) {
+        this.varosAllam = varosAllam;
+    }
+
+    public int getNezoszam() {
+        return nezoszam;
+    }
+
+    public void setNezoszam(int nezoszam) {
+        this.nezoszam = nezoszam;
     }
 }

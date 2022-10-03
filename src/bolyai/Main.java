@@ -41,7 +41,7 @@ public class Main {
             // for-each (összegzés)
             for (Donto donto : dontok) {
                 // adott meccshez tartozó különbség kiszámítása
-                String[] eredmenyek = donto.eredmeny.split("-");
+                String[] eredmenyek = donto.getEredmeny().split("-");
                 int gyoztesEredmeny = Integer.parseInt(eredmenyek[0]);
                 int vesztesEredmeny = Integer.parseInt(eredmenyek[1]);
                 // Math.abs nem feltétlenül szükséges, mivel gyoztesEredmeny >= vesztesEredmeny
@@ -67,34 +67,34 @@ public class Main {
                 // HA döntő == null, akkor a  donto.nezoszam > maxNezoszam.nezoszam összehasonlítás
                 // NEM kerül kiértékelésre.
                 // donto.nezoszam >= null.nezoszam -> NullPointerException kivétel keletkezik.
-                if (maxNezoszam == null || donto.nezoszam > maxNezoszam.nezoszam) {
+                if (maxNezoszam == null || donto.getNezoszam() > maxNezoszam.getNezoszam()) {
                     maxNezoszam = donto;
                 }
             }
 
-            RomaiSorszam romaiSorszam = new RomaiSorszam(maxNezoszam.sorszam);
+            RomaiSorszam romaiSorszam = new RomaiSorszam(maxNezoszam.getSorszam());
             String arabSorszam = romaiSorszam.getArabSsz();
 
             // redundáns, korábban már elvégeztük
-            String[] eredmenyek = maxNezoszam.eredmeny.split("-");
+            String[] eredmenyek = maxNezoszam.getEredmeny().split("-");
             int gyoztesEredmeny = Integer.parseInt(eredmenyek[0]);
             int vesztesEredmeny = Integer.parseInt(eredmenyek[1]);
 
             System.out.println("6. feladat: Legmagasabb nézőszám a döntők során:");
-            System.out.printf("\tSorszám (dátum): %s (%s)\n", arabSorszam, maxNezoszam.datum);
+            System.out.printf("\tSorszám (dátum): %s (%s)\n", arabSorszam, maxNezoszam.getDatum());
             System.out.printf(
                     "\tGyőztes csapat: %s, szerzett pontok: %d\n",
-                    maxNezoszam.gyoztes,
+                    maxNezoszam.getGyoztes(),
                     gyoztesEredmeny
             );
             System.out.printf(
                     "\tVesztes csapat: %s, szerzett pontok: %d\n",
-                    maxNezoszam.vesztes,
+                    maxNezoszam.getVesztes(),
                     vesztesEredmeny
             );
-            System.out.printf("\tHelyszín: %s\n", maxNezoszam.helyszin);
-            System.out.printf("\tVáros, állam: %s\n", maxNezoszam.varosAllam);
-            System.out.printf("\tNézőszám: %d\n", maxNezoszam.nezoszam);
+            System.out.printf("\tHelyszín: %s\n", maxNezoszam.getHelyszin());
+            System.out.printf("\tVáros, állam: %s\n", maxNezoszam.getVarosAllam());
+            System.out.printf("\tNézőszám: %d\n", maxNezoszam.getNezoszam());
 
             /*
                 3. Adatok kiírása
@@ -143,37 +143,7 @@ public class Main {
 
     private static Donto sorbolDonto(String sor) {
         // CSV sorból dolgozó konstruktor használata.
-        Donto donto = new Donto(sor);
-
-        // Minden értéket beállító konstruktor használata.
-        /* // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
-        // különálló értékekre.
-        String[] ertekek = sor.split(";");
-
-        // Új (üres, mivel nincs konstruktor) Donto példány létrehozása.
-        Donto donto = new Donto(
-                ertekek[0], ertekek[1],
-                ertekek[2], ertekek[3], ertekek[4],
-                ertekek[5], ertekek[6],
-                Integer.parseInt(ertekek[7])
-        ); */
-
-        // Default konstruktor használata.
-        /* // A fájl 1 sorának "széttörése" az elválasztó karakter (";") mentén
-        // különálló értékekre.
-        String[] ertekek = sor.split(";");
-        Donto donto = new Donto();
-        donto.sorszam = ertekek[0];
-        donto.datum = ertekek[1];
-        donto.gyoztes = ertekek[2];
-        donto.eredmeny = ertekek[3];
-        donto.vesztes = ertekek[4];
-        donto.helyszin = ertekek[5];
-        donto.varosAllam = ertekek[6];
-        donto.nezoszam = Integer.parseInt(ertekek[7]); */
-
-        // Kész döntő visszaadása a hívónak (main metódus)
-        return donto;
+        return new Donto(sor);
     }
 
     /*
@@ -195,10 +165,10 @@ public class Main {
             // A feldolgozáshoz nincs szükség az indexre.
             for (Donto donto : dontok) {
                 // régi érték + 1 vagy 1 (ha még nem volt régi érték)
-                int gyoztesSzereplesek = reszvetelekSzama.getOrDefault(donto.gyoztes, 0) + 1;
-                reszvetelekSzama.put(donto.gyoztes, gyoztesSzereplesek); // számláló frissítése
-                int vesztesSzereplesek = reszvetelekSzama.getOrDefault(donto.vesztes, 0) + 1;
-                reszvetelekSzama.put(donto.vesztes, vesztesSzereplesek);
+                int gyoztesSzereplesek = reszvetelekSzama.getOrDefault(donto.getGyoztes(), 0) + 1;
+                reszvetelekSzama.put(donto.getGyoztes(), gyoztesSzereplesek); // számláló frissítése
+                int vesztesSzereplesek = reszvetelekSzama.getOrDefault(donto.getVesztes(), 0) + 1;
+                reszvetelekSzama.put(donto.getVesztes(), vesztesSzereplesek);
 
                 // Döntő visszaalakítása sorrá a segédmetódus segítségével.
                 // Ebben az esetben változatlan formában írjuk ki az értékeket,
@@ -216,15 +186,15 @@ public class Main {
             int gyoztesSzereplesek,
             int vesztesSzereplesek
     ) {
-        RomaiSorszam romaiSorszam = new RomaiSorszam(donto.sorszam);
+        RomaiSorszam romaiSorszam = new RomaiSorszam(donto.getSorszam());
         String arabSorszam = romaiSorszam.getArabSsz();
 
         return arabSorszam
-                + ";" + donto.datum
-                + ";" + donto.gyoztes + " (" + gyoztesSzereplesek + ")"
-                + ";" + donto.eredmeny
-                + ";" + donto.vesztes + " (" + vesztesSzereplesek + ")"
-                + ";" + donto.nezoszam; // számból automatikus a szöveggé konvertálás
+                + ";" + donto.getDatum()
+                + ";" + donto.getGyoztes() + " (" + gyoztesSzereplesek + ")"
+                + ";" + donto.getEredmeny()
+                + ";" + donto.getVesztes() + " (" + vesztesSzereplesek + ")"
+                + ";" + donto.getNezoszam(); // számból automatikus a szöveggé konvertálás
     }
 
 }
