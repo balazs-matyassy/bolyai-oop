@@ -21,7 +21,7 @@ import java.util.Objects;
 // Néha nehéz eldönteni, hogy logikailag hova tartozik (pl. életkor egyértelműen az emberhez tartozik,
 // gyerekek alapján járó adókedvezmény logikailag az
 // emberhezhez vagy a bérszámfejtő modulhoz tartozik (statikus segédmetódus)).
-public class Donto {
+public class Donto implements SportDonto {
     private String sorszam;
 
     private String datum;
@@ -160,6 +160,7 @@ public class Donto {
         return romaiSorszam.getArabSsz();
     }
 
+    @Override
     public String getDatum() {
         return datum;
     }
@@ -222,6 +223,11 @@ public class Donto {
         return Math.abs(getGyoztesEredmeny() - getVesztesEredmeny());
     }
 
+    @Override
+    public boolean isDontetlen() {
+        return getKulonbseg() == 0;
+    }
+
     public String getVesztes() {
         return vesztes;
     }
@@ -230,6 +236,7 @@ public class Donto {
         this.vesztes = vesztes;
     }
 
+    @Override
     public String getHelyszin() {
         return helyszin;
     }

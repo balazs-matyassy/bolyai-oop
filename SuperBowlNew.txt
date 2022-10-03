@@ -3,7 +3,7 @@ Ssz;Dátum;Győztes;Eredmény;Vesztes;Nézőszám
 2.;1968.01.14.;Green Bay Packers (2);33-14;Oakland Raiders (1);75546
 3.;1969.01.12.;New York Jets (1);16-7;Baltimore Colts (1);75389
 4.;1970.01.11.;Kansas City Chiefs (2);23-7;Minnesota Vikings (1);80562
-5.;1971.01.17.;Baltimore Colts (2);1699-13;Dallas Cowboys (1);79204
+5.;1971.01.17.;Baltimore Colts (2);16-13;Dallas Cowboys (1);79204
 6.;1972.01.16.;Dallas Cowboys (2);24-3;Miami Dolphins (1);81023
 7.;1973.01.14.;Miami Dolphins (2);14-7;Washington Redskins (1);90182
 8.;1974.01.13.;Miami Dolphins (3);24-7;Minnesota Vikings (2);71882

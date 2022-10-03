@@ -94,6 +94,22 @@ public class Main {
                 3. Adatok kiírása
              */
             dontokKiirasa("SuperBowlNew.txt", dontok);
+
+            /*
+                Interfészek
+             */
+            Donto donto = dontok.get(0);
+            SakkDonto sakkDonto = new SakkDonto(
+                    "2022.01.01.",
+                    "XYZ",
+                    "ZZZ",
+                    "Budapest",
+                    SakkEredmeny.DONTETLEN
+            );
+            List<SportDonto> sportDontok = List.of(donto, sakkDonto);
+            int dontetlenekSzama = dontetlenekSzama(sportDontok);
+
+            System.out.printf("Döntetlenek száma: %d\n", dontetlenekSzama);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -173,6 +189,23 @@ public class Main {
                 writer.println(sor);
             }
         }
+    }
+
+    /* Interfészek */
+    // Mi legyen a lista típusa, hogy mindkettővel képesek legyünk dolgozni?
+    // List<Donto>, akkor SakkEredmeny nem képes összegezni,
+    // List<SakkEredmeny>, akkor Donto-ket nem képes összegezni.
+    // List<SportDonto> szúkített típus, emiatt mindkettővel kompatibilis
+    public static int dontetlenekSzama(List<SportDonto> dontok) {
+        int szamlalo = 0;
+
+        for (SportDonto donto : dontok) {
+            if (donto.isDontetlen()) {
+                szamlalo++;
+            }
+        }
+
+        return szamlalo;
     }
 
 }
