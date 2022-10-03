@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: egységbe zárás">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SuperBowl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SuperBowl.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SuperBowlNew.txt" beforeDir="false" afterPath="$PROJECT_DIR$/SuperBowlNew.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bolyai/Donto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bolyai/Donto.java" afterDir="false" />
-    </list>
+    <list default="true" id="61a88c98-5f46-448f-ad58-ac38b9450322" name="Changes" comment="balazs.matyassy: egységbe zárás" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +96,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664804578562</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="balazs.matyassy: egységbe zárás">
+      <created>1664805841940</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664805841940</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
